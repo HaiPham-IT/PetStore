@@ -1,18 +1,16 @@
-const Product = require('./src/model/product-schema')
-const Validation = require('validatorjs')
-const product_validator = require('./src/validation/product-validation')
+require('dotenv').config()
+const express = require('express')
+const app = express()
+const bodyparser = require('body-parser')
+const mongoose = require('mongoose')
+const {getUrlConnection} = require('./connection')
 
-let product = {
-    proId: '',
-    proName: 'pate',
-    trademark: 'Whiscat',
-    proType: 'food',
-    description: 'this is a food for pet',
-    rate: '1'
-}
- 
-let validator = new Validation(product, product_validator)
-// console.log(validator.passes)
-if(validator.fails()){
-    if(validator.errors.has('proId')) console.log(validator.errors.first('proId'))
-}
+app.use(bodyparser.json())
+app.use('/public/img', express.static('img'))
+
+//Connect db
+mongoose.connect(getUrlConnection, {useNewUrlParser: true, useUnifiedTopology: true})
+
+//Route
+
+app.listen(process.env.LISTEN_PORT|3000)

@@ -4,6 +4,6 @@ module.exports = {
     dbUserName:'',
     dbPassword:'',
     getUrlConnection: function(){
-        return `mongodb://localhost:27017/${dbName}`
+        return `mongodb://localhost:27017/${this.dbName}`
     }
 }

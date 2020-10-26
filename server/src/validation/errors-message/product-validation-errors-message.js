@@ -1,5 +1,5 @@
 module.exports = {
-    required: ':attribute is missing',
+    required: 'You forgot typing :attribute',
     min: {
         string: 'Rate is between 0 to 5'
     },

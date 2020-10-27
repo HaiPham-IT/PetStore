@@ -12,7 +12,7 @@ const createProduct = (req, res) => {
 
     let check = productValidation(product, rules)
     if(!check.status){
-        return res.status(err.statusCode).json({success: false, errMessage: check.errMessage})
+        return res.status(check.statusCode).json({success: false, errMessage: check.errMessage})
     }
     return checkProductType(product)
         .then(product => checkTrademark(product))
@@ -76,10 +76,17 @@ let checkProductType = (product) => {
     return new Promise((resolve, reject)=>{
         return Type.findOne({typeName: product.proType})
             .then((rs) => {
-                product.proType = rs._id
-                resolve(product)
+                if(!rs) {
+                    reject({err: 'Type does not exist'})
+                }else{
+                    product.proTypeId = rs._id
+                    resolve(product)
+                }
+                return;
             })
-            .catch(err=>reject(err))
+            .catch(err=>{
+                reject(err)
+            })
     })
 }
 
@@ -87,8 +94,13 @@ let checkTrademark = (product) => {
     return new Promise((resolve, reject)=>{
         return Trademark.findOne({trademarkName: product.trademark})
             .then((rs) => {
-                product.trademark = rs._id
-                resolve(product)
+                if(!rs) {
+                    reject({err: 'Trademark does not exist'})
+                }else{
+                    product.trademarkId = rs._id
+                    resolve(product)
+                } 
+                return;
             })
             .catch(err=>reject(err))
     })

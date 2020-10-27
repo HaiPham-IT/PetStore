@@ -21,7 +21,7 @@ const createProductType = (req, res) => {
 
 const productTypeValidation = (obj, rules) => {
     let validator = new Validator(obj, rules)
-    validator.setAttributeNames(productAttriName)
+    // validator.setAttributeNames(productAttriName)
     let err = {}
     if(validator.fails()){
         err.status = false

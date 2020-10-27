@@ -1,4 +1,4 @@
-const Type = require('../model/productType-schema')
+const Trademark = require('../model/trademark-schema')
 const {trademarkRules, trademarkAttriName} = require('../validation/trademark-validation')
 const Validator = require('validatorjs')
 
@@ -13,7 +13,7 @@ const createTrademark = (req, res) => {
         return res.status(err.statusCode).json({success: false, errMessage: check.errMessage})
     }
 
-    return new Type(typeObj).save()
+    return new Trademark(trademark).save()
         .then(rs => res.status(200).json({success: true, result: rs}))
         .catch(err => res.status(500).json({success: false, err}))
 
@@ -21,7 +21,7 @@ const createTrademark = (req, res) => {
 
 const trademarkValidation = (obj, rules) => {
     let validator = new Validator(obj, rules)
-    validator.setAttributeNames(trademarkAttriName)
+    // validator.setAttributeNames(trademarkAttriName)
     let err = {}
     if(validator.fails()){
         err.status = false

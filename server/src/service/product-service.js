@@ -23,7 +23,7 @@ const createProduct = (req, res) => {
 }
 
 const getProducts = (req, res) =>{
-    return Product.find()
+    return Product.find().populate('trademarkId').populate('proTypeId')
         .then(rs => {
             let obj = {
                 success: true,

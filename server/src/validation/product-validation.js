@@ -5,10 +5,11 @@ module.exports = {
         trademark: 'required',
         proType: 'required',
         description: 'required',
-        rate: 'min:0|max:5'
+        rate: 'min:0|max:5',
+        price: 'required'
     },
     rulesForModify: {
-        proId: 'required',
+        id: 'required',
         rate: 'min:0|max:5'
     },
     productAttriName: {
@@ -17,6 +18,7 @@ module.exports = {
         trademark: ' Trademark',
         proType: 'Product type',
         description: 'Description',
-        rate: 'Rate'
+        rate: 'Rate',
+        price: 'Price'
     }
 }

@@ -90,7 +90,7 @@ let checkProductType = (product) => {
     })
 }
 
-let checkTrademark = (product) => {
+const checkTrademark = (product) => {
     return new Promise((resolve, reject)=>{
         return Trademark.findOne({trademarkName: product.trademark})
             .then((rs) => {

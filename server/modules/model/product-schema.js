@@ -26,6 +26,10 @@ const product = new mongoose.Schema({
         type: Number,
         min: 0,
         max: 5
+    },
+    price: {
+        type: Number,
+        require: true
     }
 })
 

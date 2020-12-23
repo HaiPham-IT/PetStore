@@ -1,5 +1,6 @@
 require('dotenv').config()
 const express = require('express')
+const http = require('http');
 const app = express()
 const bodyparser = require('body-parser')
 const mongoose = require('mongoose')
@@ -16,7 +17,12 @@ mongoose.connect(dbInfo.getUrlConnection(), {useNewUrlParser: true, useUnifiedTo
 
 //Route
 app.use('/product', routeProduct)
+
+//error handle
+app.use((err, req, res, _next) => res.status(err.status).json({message: err.message}))
+
+const server = http.createServer(app)
 //listen port
-app.listen(process.env.LISTEN_PORT|3000, ()=> {
+server.listen(process.env.LISTEN_PORT|3000, ()=> {
     console.log(`Listen in port ${process.env.LISTEN_PORT|3000}`)
 })

@@ -1,9 +1,9 @@
 const mongoose = require('mongoose')
 const Trademark = require('./trademark-schema')
-const ProductType = require('./productType-schema')
+const Img = require('./img-schema')
 
 const product = new mongoose.Schema({
-    proId: {
+    proCode: {
         type: String, 
         require: true, 
         unique: true
@@ -11,13 +11,12 @@ const product = new mongoose.Schema({
     proName: {
         type: String
     },
-    trademarkId: {
+    trademark: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Trademark'
     },
-    proTypeId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'ProductType'
+    proType: {
+        type: String
     },
     description: {
         type: String
@@ -30,7 +29,13 @@ const product = new mongoose.Schema({
     price: {
         type: Number,
         require: true
-    }
+    },
+    img: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Img'
+        }
+    ]
 })
 
 module.exports = mongoose.model('Product', product)

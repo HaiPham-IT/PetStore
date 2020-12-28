@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const trademark = new mongoose.Schema({
-    trademarkName: {
+    name: {
         type: String,
         require: true
     }

@@ -1,13 +1,12 @@
 const express = require('express')
-var router = new express.Router()
-var {createProduct, getProducts, modifyProduct} = require('../service/product-service')
-var {createTrademark} = require('../service/trademark-service')
-var {createProductType} = require('../service/type-service')
+const router = express.Router()
+const {createProduct, getAllProduct, updateProduct, deleteProduct} = require('./prodcut-crud')
+const {checkTrademark} = require('../middleware/check-trademark-middle')
 
-router.post('/createProduct', createProduct)
-        .get('/all', getProducts)
-        .put('/modifyProduction', modifyProduct)
-        .post('/type/createType', createProductType)
-        .post('/trademark/createTrademark', createTrademark)
+router.post('/', checkTrademark, createProduct)
+        .get('/', getAllProduct)
+        .put('/', checkTrademark, updateProduct)
+        .delete('/:id', deleteProduct)
 
-module.exports = route
+
+module.exports = router

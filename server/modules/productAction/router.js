@@ -2,11 +2,12 @@ const express = require('express')
 const router = express.Router()
 const {createProduct, getAllProduct, updateProduct, deleteProduct} = require('./prodcut-crud')
 const {checkTrademark} = require('../middleware/check-trademark-middle')
+const {verify} = require('../auth')
 
-router.post('/', checkTrademark, createProduct)
+router.post('/', verify, checkTrademark, createProduct)
         .get('/', getAllProduct)
-        .put('/', checkTrademark, updateProduct)
-        .delete('/:id', deleteProduct)
+        .put('/', verify, checkTrademark, updateProduct)
+        .delete('/:id', verify, deleteProduct)
 
 
 module.exports = router

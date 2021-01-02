@@ -1,6 +1,6 @@
-require('dotenv').config()
+const config = require('./config')
 module.exports = {
-    dbName: process.env.DB_NAME||"petstoredb",
+    dbName: config.db.dbName || "petstoredb",
     dbUserName:'',
     dbPassword:'',
     getUrlConnection: function(){

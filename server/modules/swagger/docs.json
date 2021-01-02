@@ -1,0 +1,402 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "title": "Pet Store API",
+      "description": "",
+      "version": "1.0"
+    },
+    "produces": [
+      "application/json"
+    ],
+    "consumes": [
+      "application/json"
+    ],
+    "host": "localhost:3000",
+    "basePath": "/",
+    "paths": {
+      "/api/v1/user": {
+        "post": {
+          "description": "Create User",
+          "summary": "Create User",
+          "tags":["Authen"],
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "in": "header",
+              "description": "application/json",
+              "required": true,
+              "type": "string",
+              "enum": ["application/json"]
+            },
+            {
+              "name": "requestBody",
+              "in": "body",
+              "description": "Request body",
+              "required": true,
+              "schema":{
+                "$ref": "#/definitions/User"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Create successfull",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            },
+            "409": {
+              "description": "already exist"
+            },
+            "500": {
+              "description": "Server Error"
+            }
+          }
+        }
+      },
+      "/api/v1/user/login": {
+        "post": {
+          "description": "Get Token",
+          "summary": "Get Token",
+          "tags": ["Authen"],
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "in": "header",
+              "description": "application/json",
+              "required": true,
+              "enum": ["application/json"]
+            },
+            {
+              "name": "requestBody",
+              "in": "body",
+              "description": "Request body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/loginInfo"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Login successfull",
+              "schema": {
+                "$ref": "#/definitions/loginInfo"
+              },
+              "400": {
+                "description": "Bad request"
+              },
+              "500": {
+                "description": "Server Error"
+              }
+            }
+          }
+        }
+      },
+      "/api/v1/product": {
+        "post": {
+          "description": "Create Production",
+          "summary": "Create Production",
+          "tags": ["Production"],
+          "parameters": [
+            {
+              "name": "Authorization",
+              "in": "header",
+              "description": "Bearer tokenValue<br>or<br>\n",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "Content-Type",
+              "in": "header",
+              "description": "application/json",
+              "required": true,
+              "type": "string",
+              "enum": ["application/json"]
+            },
+            {
+              "name": "requestBody",
+              "in": "body",
+              "description": "Request body",
+              "required": true,
+              "schema": {
+                  "$ref": "#/definitions/Product"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref":"#/definitions/Product"
+              }
+            },
+            "401": {
+              "description": "Authentication failed"
+            },
+            "500": {
+              "description": "Server Error"
+            }
+          }
+        },
+        "get": {
+          "description": "Get All Production",
+          "summary": "Get All Production",
+          "tags": ["Production"],
+          "parameters": [],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/Product"
+                }
+              }
+            },
+            "500": {
+              "description": "Server Error"
+            }
+          }
+        },
+        "put": {
+          "description": "Update Production",
+          "summary": "Update Production",
+          "tags": ["Production"],
+          "parameters": [
+            {
+              "name": "Authorization",
+              "in": "header",
+              "description": "Bearer tokenValue<br>or<br>\n",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "Content-Type",
+              "in": "header",
+              "description": "application/json",
+              "required": true,
+              "type": "string",
+              "enum": ["application/json"]
+            },
+            {
+              "name" : "id",
+              "in": "query",
+              "description": "Production Id",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "requestBody",
+              "in": "body",
+              "description": "Request body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/Product"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/Product"
+              }
+            },
+            "404": {
+              "description": "Trademark not found"
+            },
+            "500": {
+              "description": "Server Error"
+            }
+          }
+        }
+      },
+      "/api/v1/product/{id}": {
+        "delete": {
+          "description": "Delete production by Id",
+          "summary": "Delete production by Id",
+          "tags": ["Production"],
+          "parameters":[
+            {
+              "name": "Authorization",
+              "in": "header",
+              "description": "Bearer tokenValue<br>or<br>\n",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "id",
+              "in": "path",
+              "description": "Production Id",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Delete successfull"
+            },
+            "500": {
+              "description": "Server Error"
+            }
+          }
+        }
+      },
+      "/api/v1/trademark":{
+        "post":{
+          "description": "Create trademark",
+          "summary": "Add New trademark",
+          "tags":["Trademark"],
+          "parameters":[
+            {
+              "name":"requestBody",
+              "in": "body",
+              "description":"Request body",
+              "required": true,
+              "schema":{
+                "$ref":"#/definitions/Trademark"
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "Create Successfull",
+              "schema":{
+                "$ref": "#/definitions/Trademark"
+              }
+            },
+            "500": {
+              "description": "Server Error"
+            }
+          }
+        }
+      },
+      "api/v1/trademark/{name}": {
+        "delete": {
+          "description": "Delete Trademark by name.",
+          "summary": "Delete Trademark by name.",
+          "tags": ["Trademark"],
+          "parameters": [
+            {
+              "name": "Authorization",
+              "description": "Bearer tokenValue<br>or<br>\n",
+              "in": "header",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "name",
+              "in": "path",
+              "description": "Trademark name",
+              "required": true,
+              "type": "string"
+            }
+          ]
+        }
+      }
+    },
+    "definitions":{
+      "Product":{
+        "description": "Product",
+        "required": [
+            "proCode"
+        ],
+        "properties": {
+          "proCode": {
+            "type": "string",
+            "description": "Production Code"
+          },
+          "proName":{
+            "type": "string",
+            "description": "Production Name"
+          },
+          "trademark": {
+            "type": "string",
+            "description": "Production trademark"
+          },
+          "proType": {
+            "type": "string",
+            "description": "Production type"
+          },
+          "description": {
+            "type": "string",
+            "description": "Production description"
+          },
+          "rate": {
+            "type": "integer",
+            "description": "Production rate"
+          },
+          "price": {
+            "type": "integer",
+            "description": "Production price"
+          }
+        }
+      },
+      "Trademark":{
+        "description": "Trademark body",
+        "required": [
+          "name"
+        ],
+        "properties":{
+          "name": {
+            "type": "string",
+            "description": "name of trademark"
+          }
+        }
+      },
+      "loginInfo": {
+        "description": "Login infomation",
+        "required": ["username", "password"],
+        "properties": {
+          "username": {
+            "type": "string",
+            "description": "Username"
+          },
+          "password": {
+            "type": "string",
+            "description": "Password"
+          }
+        }
+      },
+      "User": {
+        "description": "User body",
+        "required": ["username", "password"],
+        "properties": {
+          "username": {
+            "type": "string",
+            "description": "Username"
+          },
+          "password": {
+            "type": "string",
+            "description": "Password"
+          },
+          "info": {
+            "type": "object",
+            "properties": {
+              "fullname": {
+                "type": "string",
+                "description": "FullName"
+              },
+              "phone": {
+                "type": "string",
+                "description": "Number Phone"
+              },
+              "code": {
+                "type": "string",
+                "description": "Identity card"
+              },
+              "address": {
+                "type": "string",
+                "description": "Address"
+              },
+              "email": {
+                "type": "string",
+                "description": "Email"
+              }
+            }
+          }
+        }
+      }
+    }
+ }

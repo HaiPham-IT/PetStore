@@ -1,10 +1,8 @@
-FROM node:12.7.0-alpine
+FROM node
 
-WORKDIR /app
+WORKDIR /usr/src/app
 
-COPY server /app
-
-RUN ls
+COPY server .
 
 RUN npm install
 

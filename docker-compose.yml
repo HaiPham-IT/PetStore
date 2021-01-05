@@ -1,0 +1,14 @@
+version: '2'
+services:
+  server:
+    image: pet-store
+    build: .
+    links:
+      - mongo:mongo
+    ports:
+      - '3000:3000'
+
+  mongo:
+    image: mongo
+    ports:
+      - '27017:27017'

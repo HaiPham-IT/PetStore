@@ -1,4 +1,3 @@
-require('dotenv').config()
 const config = require('./config')
 const express = require('express')
 const app = express()
@@ -32,6 +31,6 @@ app.use((err, req, res, next) => {
 })
 
 //listen port
-app.listen(config.port.http||3000, ()=> {
-    console.log(`Listen in port ${process.env.LISTEN_PORT|3000}`)
+app.listen(config.port.http || 3000, ()=> {
+    console.log(`Listen in port ${config.port.http || 3000}`)
 })

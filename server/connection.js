@@ -1,10 +1,12 @@
 const config = require('./config')
 module.exports = {
-    dbName: config.db.dbName || "petstoredb",
+    dbName: config.db.dbName,
     dbUserName:'',
     dbPassword:'',
+    dbHost:config.db.dbHost,
+    dbPort:config.db.dbPort,
     getUrlConnection: function(){
-        console.log(`mongodb://localhost:27017/${this.dbName}`)
-        return `mongodb://localhost:27017/${this.dbName}`
+        console.log(`mongodb://${this.dbHost}:${this.dbPort}/${this.dbName}`)
+        return `mongodb://${this.dbHost}:${this.dbPort}/${this.dbName}`
     }
 }

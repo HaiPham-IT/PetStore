@@ -1,14 +1,21 @@
-version: '2'
+version: '3.4'
 services:
   server:
     image: pet-store
     build: .
-    links:
-      - mongo:mongo
+    environment:
+      DB_NAME: petStore
+      DB_HOST: mongo
+      DB_PORT: 27017
     ports:
-      - '3000:3000'
-
+      - 3000:3000
+    volumes:
+      - ./server:/usr/src/app
   mongo:
     image: mongo
     ports:
-      - '27017:27017'
+      - 27017:27017
+    volumes:
+      - data:/data/db
+volumes:
+  data:

@@ -9,7 +9,9 @@ module.exports = {
         algorithm: process.env.JWT_ALGORITHM || 'HS256'
     },
     db: {
-        dbName: process.env.DB_NAME || 'petstoredb'
+        dbName: process.env.DB_NAME || 'petstoredb',
+        dbHost: process.env.DB_HOST || 'localhost',
+        dbPort: process.env.DB_PORT || '27017'
     },
     scryptSecret: process.env.CRYPTO_SECRET_KEY || 'This1s4Rand0m'
 }

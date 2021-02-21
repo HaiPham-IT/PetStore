@@ -1,6 +1,5 @@
 const mongoose = require('mongoose')
 const Trademark = require('./trademark-schema')
-const Img = require('./img-schema')
 
 const product = new mongoose.Schema({
     proCode: {
@@ -32,8 +31,7 @@ const product = new mongoose.Schema({
     },
     img: [
         {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Img'
+            type: String
         }
     ]
 })

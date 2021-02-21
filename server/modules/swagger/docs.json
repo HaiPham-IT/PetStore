@@ -140,10 +140,54 @@
           }
         },
         "get": {
-          "description": "Get All Production",
-          "summary": "Get All Production",
+          "description": "Search Production",
+          "summary": "Search Production",
           "tags": ["Production"],
-          "parameters": [],
+          "parameters": [
+            {
+              "name": "Authorization",
+              "in": "header",
+              "description": "Bearer tokenValue<br>or<br>\n",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "name": "proCode",
+              "in": "query",
+              "description": "Code of production",
+              "type": "string"
+            },
+            {
+              "name": "proName",
+              "in": "query",
+              "description": "product's name",
+              "type": "string"
+            },
+            {
+              "name": "trademark",
+              "in": "query",
+              "description": "trademark",
+              "type": "string"
+            },
+            {
+              "name": "proType",
+              "in": "query",
+              "description": "production type",
+              "type": "string"
+            },
+            {
+              "name": "page",
+              "in": "query",
+              "description": "Page index.\n Default: 1",
+              "type": "integer"
+            },
+            {
+              "name": "pageSize",
+              "in": "query",
+              "description": "Page Size.\n Default: 10",
+              "type": "integer"
+            }
+          ],
           "responses": {
             "200": {
               "description": "OK",
@@ -227,7 +271,7 @@
             },
             {
               "name": "id",
-              "in": "path",
+              "in": "query",
               "description": "Production Id",
               "required": true,
               "type": "string"

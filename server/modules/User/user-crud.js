@@ -1,5 +1,4 @@
 const User = require('../model/user-schema')
-const Info = require('../model/user-info-schema')
 const crypto = require('../crypto')
 const createErr = require('../common/create-error')
 
@@ -13,11 +12,9 @@ const createUser = async (req, res, next) => {
     let status = await validation(data)
     if(status === 'ok'){
       data.password = crypto.encrypt(data.password)
-      data.info = await new Info(data.info).save()
-      data.info = data.info._id
       data = await new User(data).save()
     }
-    if(data._id) return res.status(200).json({message: 'Create successfull'})
+    res.status(200).json(data)
   } catch (error) {
     next(error)
   }
@@ -36,7 +33,7 @@ const checkUser = (username = mandory('usrname'), password = mandory('password')
 const checkemail = (info) => {
   if(!info || !info.email) return
   return new Promise((resolve, reject) => {
-    return Info.findOne({email: info.email}, (err, rs) => {
+    return User.findOne({'info.email': info.email}, (err, rs) => {
       if(err) return reject(err)
       if(rs) return resolve("exits")
       return resolve('not exist')
